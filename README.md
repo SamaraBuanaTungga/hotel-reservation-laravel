@@ -54,3 +54,11 @@ Sistem ini mengandalkan relasi erat antar tabel demi menjaga integritas data tra
 [Tamu Reservasi] ➡️ [Terbit Kode Booking] ➡️ [Tamu Tiba di Hotel]
                                                    ⬇️
 [Selesai Check-Out] ⬅️ [Scan QR / Validasi] ⬅️ [Petugas Eksekusi Check-In]
+
+---
+
+## 🔗 Tautan Aplikasi (Live Demo)
+
+Anda dapat mengakses dan menguji aplikasi yang sudah dideploy secara langsung melalui tautan di bawah ini:
+* **Link Hosting**: [https://samarabt.my.id/](https://samarabt.my.id/) 
+* **Video Demo**: [https://youtu.be/link-video-anda](https://youtu.be/link-video-anda)
