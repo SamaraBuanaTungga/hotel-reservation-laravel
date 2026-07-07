@@ -54,7 +54,7 @@ Sistem ini mengandalkan relasi erat antar tabel demi menjaga integritas data tra
 [Tamu Reservasi] ➡️ [Terbit Kode Booking] ➡️ [Tamu Tiba di Hotel]
                                                    ⬇️
 [Selesai Check-Out] ⬅️ [Scan QR / Validasi] ⬅️ [Petugas Eksekusi Check-In]
-
+```
 ---
 
 ## 🔗 Tautan Aplikasi (Live Demo)
