@@ -1,59 +1,56 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏨 LuxeHotel - Room Booking & Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Laravel Version](https://img.shields.io/badge/Laravel-v11.x-FF2D20?logo=laravel&logoColor=white)](https://laravel.com)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v3.x-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## About Laravel
+LuxeHotel adalah aplikasi sistem informasi manajemen reservasi hotel, inventaris kamar, dan verifikasi alur *Check-In / Check-Out* berbasis web. Aplikasi ini dirancang dengan arsitektur modern menggunakan komponen bertenaga Tailwind CSS, navigasi adaptif, dukungan penuh terhadap *Dark Mode*, serta mekanisme verifikasi menggunakan integrasi sistem *Dynamic QR Code*.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Proyek ini dibangun secara khusus untuk memenuhi standar penilaian tugas besar mata kuliah **Pemrograman Web / Rekayasa Perangkat Lunak**.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ✨ Fitur Utama & Detail Implementasi
 
-## Learning Laravel
+### 🔐 1. Autentikasi & Manajemen Hak Akses (RBAC)
+* **Email-Based Authentication**: Mengeliminasi kolom `username` tradisional pada database dan form pendaftaran untuk memangkas redundansi data. Autentikasi sepenuhnya bertumpu pada *Electronic Mail* dan *Password*.
+* **Symmetrical Form Layout**: Desain antarmuka yang presisi dan sejajar antara halaman tambah (*create*) dan ubah (*edit*) pengguna untuk menjaga konsistensi pengalaman visual (*User Experience*).
+* **Multi-Role Authorization**: 
+  * `System Administrator (admin)`: Hak penuh untuk mengelola konfigurasi sistem, data kamar, harga, dan manajemen akun staf.
+  * `Operational Staff (petugas)`: Hak terbatas untuk mengeksekusi proses reservasi, verifikasi kedatangan tamu (*check-in*), serta kepulangan tamu (*check-out*).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 🔑 2. Resepsionis & Verifikasi Akses Real-Time
+* **Check-In & Check-Out Live Tracker**: Pencatatan waktu riil (*real-time timestamp*) yang mencatat kapan tamu melakukan check-in dan check-out lengkap dengan data *Duty Officer* (petugas yang melayani).
+* **Dynamic QR Code Generator**: Integrasi API eksternal yang merender data string `kode_booking` menjadi gambar kode matriks QR secara dinamis melalui jendela modal pop-up interaktif tanpa membebani penyimpanan server lokal.
+* **Live Room Status**: Status kamar akan otomatis berubah menjadi `Occupied` saat tamu berhasil diverifikasi masuk dan kembali menjadi `Available` / `Dirty` saat proses check-out selesai disinkronisasi.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🛠️ Arsitektur Teknologi
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+* **Backend & Routing Engine:** Laravel 11.x (PHP >= 8.2)
+* **Frontend UI:** Blade Templating Engine + Tailwind CSS v3.x
+* **State & Icons:** Lucide Icons Client-side Directive
+* **Database Driver:** MySQL 8.0+ / MariaDB
+* **QR Engine Core:** API Server-less QR Generator (HTTPS Rest Client)
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 🗄️ Skema & Struktur Database (Ringkasan)
 
-## Contributing
+Sistem ini mengandalkan relasi erat antar tabel demi menjaga integritas data transaksi hotel:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+* **Tabel `users`**: Menyimpan profil operator (`id`, `name`, `email`, `password`, `role`, `timestamps`). *Catatan: Tidak mengandung kolom username.*
+* **Tabel `tamus`**: Menyimpan data identitas pelanggan (`id`, `nik`, `nama_lengkap`, `no_telepon`, `email`).
+* **Tabel `kamars`**: Menyimpan spesifikasi ruangan (`id`, `nomor_kamar`, `tipe_kamar`, `harga`, `status`).
+* **Tabel `bookings`**: Menghubungkan tamu, kamar (via *pivot table* `booking_kamar`), rentang tanggal sewa, total bayar, dan status transaksi.
+* **Tabel `checkins`**: Pencatatan log kedatangan (`id`, `booking_id`, `user_id`, `waktu_checkin`).
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🔁 Alur Kerja Operasional (Workflow)
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```text
+[Tamu Reservasi] ➡️ [Terbit Kode Booking] ➡️ [Tamu Tiba di Hotel]
+                                                   ⬇️
+[Selesai Check-Out] ⬅️ [Scan QR / Validasi] ⬅️ [Petugas Eksekusi Check-In]
