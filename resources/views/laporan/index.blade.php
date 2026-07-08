@@ -10,10 +10,11 @@
             <p class="text-gray-500 dark:text-gray-400 font-medium">Deep insights into LuxeHotel's financial performance.</p>
         </div>
         <div class="flex items-center gap-3">
-            <a href="{{ route('laporan.pdf', request()->all()) }}" class="px-6 py-3 bg-white dark:bg-slate-800 text-red-600 dark:text-red-400 font-black rounded-2xl hover:bg-red-50 dark:hover:bg-red-900/20 transition-all border-2 border-red-100 dark:border-red-900/30 flex items-center gap-2 text-xs uppercase tracking-widest shadow-sm">
+            <a href="{{ route('laporan.pdf', request()->all() ? request()->all() : ['dari' => $dari->format('Y-m-d'), 'sampai' => $sampai->format('Y-m-d')]) }}" class="px-6 py-3 bg-white dark:bg-slate-800 text-red-600 dark:text-red-400 font-black rounded-2xl hover:bg-red-50 dark:hover:bg-red-900/20 transition-all border-2 border-red-100 dark:border-red-900/30 flex items-center gap-2 text-xs uppercase tracking-widest shadow-sm">
                 <i data-lucide="file-text" class="w-5 h-5"></i> Export PDF
             </a>
-            <a href="{{ route('laporan.excel', request()->all()) }}" class="px-6 py-3 bg-white dark:bg-slate-800 text-green-600 dark:text-green-400 font-black rounded-2xl hover:bg-green-50 dark:hover:bg-green-900/20 transition-all border-2 border-green-100 dark:border-green-900/30 flex items-center gap-2 text-xs uppercase tracking-widest shadow-sm">
+            
+            <a href="{{ route('laporan.excel', request()->all() ? request()->all() : ['dari' => $dari->format('Y-m-d'), 'sampai' => $sampai->format('Y-m-d')]) }}" class="px-6 py-3 bg-white dark:bg-slate-800 text-green-600 dark:text-green-400 font-black rounded-2xl hover:bg-green-50 dark:hover:bg-green-900/20 transition-all border-2 border-green-100 dark:border-green-900/30 flex items-center gap-2 text-xs uppercase tracking-widest shadow-sm">
                 <i data-lucide="file-spreadsheet" class="w-5 h-5"></i> Export Excel
             </a>
         </div>

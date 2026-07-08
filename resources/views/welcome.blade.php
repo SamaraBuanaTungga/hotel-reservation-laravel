@@ -96,18 +96,18 @@
                 </div>
             </div>
 
-            {{-- Mockup Interface Preview --}}
-            <div class="mt-20 relative group cursor-pointer">
+            {{-- Video Walkthrough Preview Container --}}
+            <div class="mt-20 relative">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-transparent z-10 pointer-events-none"></div>
-                <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-2xl shadow-slate-900/10 overflow-hidden transform group-hover:scale-[1.005] transition-all duration-500">
-                    <div class="rounded-2xl overflow-hidden bg-slate-900 aspect-video flex items-center justify-center relative">
-                        <i data-lucide="layout-dashboard" class="w-32 h-32 text-slate-800 opacity-20"></i>
-                        <div class="absolute inset-0 flex flex-col items-center justify-center text-white space-y-4 bg-slate-950/20 backdrop-blur-[1px]">
-                            <div class="w-16 h-16 bg-accent-gold text-slate-900 rounded-full flex items-center justify-center shadow-lg">
-                                <i data-lucide="play" class="w-6 h-6 fill-current ml-1"></i>
-                            </div>
-                            <span class="font-black uppercase tracking-[0.2em] text-[10px] text-slate-200">System Interface Architecture</span>
-                        </div>
+                <div class="rounded-3xl border border-slate-200 bg-white p-4 shadow-2xl shadow-slate-900/10 overflow-hidden">
+                    <div class="rounded-2xl overflow-hidden bg-slate-900 aspect-video relative shadow-inner">
+                        <iframe 
+                            class="w-full h-full border-0 absolute inset-0 z-0" 
+                            src="https://www.youtube.com/embed/e3_AkAwxY2Y" 
+                            title="LuxeHotel Video Demonstrasi"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                         iframe>
                     </div>
                 </div>
             </div>

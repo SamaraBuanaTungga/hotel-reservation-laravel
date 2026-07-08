@@ -9,13 +9,30 @@
             <h1 class="text-3xl font-black text-gray-900 dark:text-white tracking-tight">Audit Trail</h1>
             <p class="text-gray-500 dark:text-gray-400 font-medium">A forensic timeline of all critical system operations.</p>
         </div>
-        <form action="{{ route('activity-log.clear-old') }}" method="POST" class="inline">
-            @csrf
-            <input type="hidden" name="hari" value="30">
-            <button type="button" onclick="confirmClearLegacyLogs(event)" class="px-6 py-3 bg-red-50 dark:bg-red-900/10 text-red-700 dark:text-red-400 font-black rounded-2xl hover:bg-red-100 dark:hover:bg-red-900/20 transition-all border border-red-200 dark:border-red-900/30 text-xs uppercase tracking-widest flex items-center gap-2 transform active:scale-95">
-                <i data-lucide="trash-2" class="w-4 h-4"></i> Clear Legacy History
-            </button>
-        </form>
+        <div class="pt-4 border-t border-gray-100 dark:border-slate-800 space-y-3">
+            <div class="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    Forensic Reporting & Management Tools
+            </div>
+            {{-- Grid Kontainer Tiga Tombol Sebaris Seimbang --}}
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
+                {{-- 1. Export PDF --}}
+                <a href="{{ route('activity-log.pdf', request()->query()) }}" class="px-4 py-3 bg-amber-50 dark:bg-amber-900/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-900/30 font-black rounded-xl text-[10px] uppercase tracking-widest hover:bg-amber-100 dark:hover:bg-amber-900/20 transition-all flex items-center justify-center gap-2 transform active:scale-95">
+                    <i data-lucide="file-text" class="w-4 h-4 text-accent-gold"></i> Export PDF
+                </a>                    
+                {{-- 2. Export Excel --}}
+                <a href="{{ route('activity-log.excel', request()->query()) }}" class="px-4 py-3 bg-emerald-50 dark:bg-emerald-900/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/30 font-black rounded-xl text-[10px] uppercase tracking-widest hover:bg-emerald-100 dark:hover:bg-emerald-900/20 transition-all flex items-center justify-center gap-2 transform active:scale-95">
+                    <i data-lucide="sheet" class="w-4 h-4"></i> Export Excel
+                </a>
+                {{-- 3. Clear History / Delete --}}
+                <form action="{{ route('activity-log.clear-old') }}" method="POST" class="w-full">
+                    @csrf
+                    <input type="hidden" name="hari" value="30">
+                    <button type="button" onclick="confirmClearLegacyLogs(event)" class="w-full px-4 py-3 bg-red-50 dark:bg-red-900/10 text-red-700 dark:text-red-400 font-black rounded-xl hover:bg-red-100 dark:hover:bg-red-900/20 transition-all border border-red-200 dark:border-red-900/30 text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transform active:scale-95">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i> Clear History
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <x-card>
@@ -61,16 +78,6 @@
             <div class="pt-3 border-t border-gray-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
                 <div class="text-[10px] font-black text-gray-400 uppercase tracking-widest">
                     Forensic Reporting Tools
-                </div>
-                <div class="flex items-center gap-3 w-full sm:w-auto">
-                    {{-- Export PDF --}}
-                    <a href="{{ route('activity-log.pdf', request()->query()) }}" class="flex-1 sm:flex-initial px-4 py-2 bg-amber-50 dark:bg-amber-900/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-900/30 font-black rounded-xl text-[10px] uppercase tracking-widest hover:bg-amber-100 dark:hover:bg-amber-900/20 transition-all flex items-center justify-center gap-2">
-                        <i data-lucide="file-text" class="w-3.5 h-3.5 text-accent-gold"></i> Export PDF
-                    </a>                    
-                    {{-- Export Excel --}}
-                    <a href="{{ route('activity-log.excel', request()->query()) }}" class="flex-1 sm:flex-initial px-4 py-2 bg-emerald-50 dark:bg-emerald-900/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/30 font-black rounded-xl text-[10px] uppercase tracking-widest hover:bg-emerald-100 dark:hover:bg-emerald-900/20 transition-all flex items-center justify-center gap-2">
-                        <i data-lucide="sheet" class="w-3.5 h-3.5"></i> Export Excel
-                    </a>
                 </div>
             </div>
         </div>
